@@ -4,13 +4,13 @@ const path = require('path')
 const {getGateway} = require("./utils");
 const {importPeerUserOnWallet} = require("./utils");
 
-// **Privi ORGANIZATION Name**
+// **Org1 ORGANIZATION Name**
 let orgName = "org1"
-// Privi msp ID
+// Org1 msp ID
 let mspId = "org1MSP"
-// Privi channel id
+// Org1 channel id
 let channelId = "mychannel"
-// Privi smartcontract name
+// Org1 smartcontract name
 let smartcontractName = "marbles"
 
 const CORE_PEER_MSPCONFIGPATH = path.resolve('./organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp')
