@@ -1,0 +1,56 @@
+version: "1.0"
+name: example
+description: example
+channels:
+  # name of the channel you are going to connect to
+  mychannel:
+    # List of peers from participating organizations
+    peers:
+      peer1.org1.example.com:
+        endorsingPeer: false
+        chaincodeQuery: false
+        ledgerQuery: false
+        # Will this peer be the target of a SDK listener registration? All peers can
+        # produce events but the app typically only needs to connect to one to listen to events.
+        eventSource: true
+        discover: true
+
+#
+# list of participating organizations in this network
+#
+organizations:
+  org1:
+    mspid: org1MSP
+    # The peers that are known to be in this organization
+    peers:
+      - peer1.org1.example.com
+peers:
+  peer0.org1.example.com:
+    url: grpcs://X.X.X.X:7451
+    eventUrl: grpcs://X.X.X.X:7453
+    grpcOptions:
+      ssl-target-name-override: peer0.org1.example.com
+      # grpc.keepalive_time_ms: 600000
+    tlsCACerts:
+      path: organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/msp/tlscacerts/tlsca.org1.example.com-cert.pem
+
+# wallet path
+client:
+  organization: org1.example
+  credentialStore:
+    path: ./fabric-client-wallet
+    cryptoStore:
+      path: ./fabric-client-wallet
+    wallet: wallet-name
+# use only if you are going to generate cryptographic artifacts
+certificateAuthorities:
+  ca-org1.example:
+    url: https://localhost:7154
+    httpOptions:
+      verify: false
+    tlsCACerts:
+      path: organizations/peerOrganizations/org1.example.com/ca/ca.org1.example.com-cert.pem
+    registrar:
+      - enrollId: admin
+        enrollSecret: adminpw
+    caName: ca-org1.example
